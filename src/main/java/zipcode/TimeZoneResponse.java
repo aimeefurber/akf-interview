@@ -8,11 +8,11 @@ public class TimeZoneResponse {
     @JsonProperty("-property")
     private TimeZone result;
 
-    public TimeZone getResult(){
+    public TimeZone getResult() {
         return result;
     }
 
-    public void setResult(TimeZone result){
+    public void setResult(TimeZone result) {
         this.result = result;
     }
 

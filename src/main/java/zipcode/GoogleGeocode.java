@@ -13,11 +13,11 @@ public class GoogleGeocode {
         return restTemplate.getForObject(geocodeURL, GeocodeResponse.class, zipCode, key);
     }
 
-    public String getLat(GeocodeResponse geocode){
+    public String getLat(GeocodeResponse geocode) {
         return geocode.getResults()[0].getGeometry().getLocation().getLat();
     }
 
-    public String getlng(GeocodeResponse geocode){
+    public String getlng(GeocodeResponse geocode) {
         return geocode.getResults()[0].getGeometry().getLocation().getLng();
     }
 }

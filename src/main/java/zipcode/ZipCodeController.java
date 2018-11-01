@@ -19,7 +19,8 @@ public class ZipCodeController {
     private final OpenWeather openWeather;
 
     @Autowired
-    public ZipCodeController(RestTemplateBuilder builder, GoogleGeocode googleGeocode, GoogleTimeZone googleTimeZone, GoogleElevation googleElevation, OpenWeather openWeather) {
+    public ZipCodeController(RestTemplateBuilder builder, GoogleGeocode googleGeocode, GoogleTimeZone googleTimeZone,
+                             GoogleElevation googleElevation, OpenWeather openWeather) {
         this.restTemplate = builder.build();
         this.googleGeocode = googleGeocode;
         this.googleTimeZone = googleTimeZone;
@@ -37,7 +38,6 @@ public class ZipCodeController {
     public String index() {
         return "index";
     }
-
 
 
     @RequestMapping("/zipdata")

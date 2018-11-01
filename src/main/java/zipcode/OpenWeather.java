@@ -12,7 +12,7 @@ public class OpenWeather {
         return restTemplate.getForObject(weatherURL, WeatherResponse.class, zipCode, key);
     }
 
-    public String getTemperature(WeatherResponse weather){
+    public String getTemperature(WeatherResponse weather) {
         return weather.getWeatherDetails().getTemperature();
     }
 }
