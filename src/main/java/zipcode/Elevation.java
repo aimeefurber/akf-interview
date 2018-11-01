@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ElevationResults {
+public class Elevation {
     @JsonProperty("elevation")
     private String elevation;
 
@@ -18,7 +18,7 @@ public class ElevationResults {
 
     @Override
     public String toString() {
-        return "ElevationResults{" +
+        return "Elevation{" +
                 "elevation='" + elevation + '\'' +
                 '}';
     }

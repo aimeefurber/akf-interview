@@ -4,22 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TimeZone {
-    @JsonProperty("timeZoneName")
-    private String timeZoneName;
+public class Geometry {
+    private String geometry;
 
-    public String getTimeZoneName() {
-        return timeZoneName;
-    }
-
-    public void setTimeZoneName(String timeZoneName) {
-        this.timeZoneName = timeZoneName;
+    public String getGeometry() {
+        return geometry;
     }
 
     @Override
     public String toString() {
-        return "TimeZone{" +
-                "timeZoneName='" + timeZoneName + '\'' +
+        return "Geometry{" +
+                "geometry='" + geometry + '\'' +
                 '}';
+    }
+
+    public void setGeometry(String geometry) {
+        this.geometry = geometry;
     }
 }

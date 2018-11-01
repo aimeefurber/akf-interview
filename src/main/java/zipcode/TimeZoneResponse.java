@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TimeZoneResponse {
-    @JsonProperty("timeZoneName")
+    @JsonProperty("-property")
     private TimeZone result;
 
     public TimeZone getResult(){

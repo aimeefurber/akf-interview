@@ -4,22 +4,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GeocodeResults {
-    @JsonProperty("geometry")
-    private GeocodeGeometry geometry;
+public class ElevationResults {
+    @JsonProperty("elevation")
+    private String elevation;
 
-    public GeocodeGeometry getGeometry() {
-        return geometry;
+    public String getElevation() {
+        return elevation;
     }
 
-    public void setGeometry(GeocodeGeometry geometry) {
-        this.geometry = geometry;
+    public void setElevation(String elevation) {
+        this.elevation = elevation;
     }
 
     @Override
     public String toString() {
-        return "GeocodeResults{" +
-                "geometry=" + geometry +
+        return "ElevationResults{" +
+                "elevation='" + elevation + '\'' +
                 '}';
     }
 }

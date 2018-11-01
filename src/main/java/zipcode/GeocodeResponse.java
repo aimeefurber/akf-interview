@@ -3,17 +3,26 @@ package zipcode;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TimeZoneResponse {
-    @JsonProperty("timeZoneName")
-    private TimeZone result;
+public class GeocodeResponse {
 
-    public TimeZone getResult(){
-        return result;
+    @JsonProperty("results")
+    private GeocodeResults[] results;
+
+    public GeocodeResults[] getResults() {
+        return results;
     }
 
-    public void setResult(TimeZone result){
-        this.result = result;
+    @Override
+    public String toString() {
+        return "GeocodeResponse{" +
+                "results=" + Arrays.toString(results) +
+                '}';
     }
 
+    public void setResults(GeocodeResults[] results) {
+        this.results = results;
+    }
 }
