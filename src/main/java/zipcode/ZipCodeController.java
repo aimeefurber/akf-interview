@@ -1,17 +1,57 @@
 package zipcode;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-import java.sql.Time;
-
-@RestController
+@Controller
 public class ZipCodeController {
 
-    @RequestMapping("/zip")
-    public ZipCode zipCode(@RequestParam(value = "zip") int zipCode) {
+    private RestTemplate restTemplate;
 
-        return null;
+    @Autowired
+    public ZipCodeController(RestTemplateBuilder builder) {
+        this.restTemplate = builder.build();
+    }
+
+    @Value("${google.api.key}")
+    String googleApiKey;
+
+    @Value("${weather.api.key}")
+    String weatherApiKey;
+
+    @RequestMapping("/")
+    public String index(){
+       return "index";
+    }
+
+    @RequestMapping("/zipdata")
+    public String zipCode(@RequestParam(value = "zip") String zipCode, Model model) {
+        GoogleGeocode googleGeocode = new GoogleGeocode();
+        GeocodeResponse geocode = googleGeocode.getGeoCode(zipCode, restTemplate, googleApiKey);
+        final String lat = geocode.getResults()[0].getGeometry().getLocation().getLat();
+        final String lng = geocode.getResults()[0].getGeometry().getLocation().getLng();
+
+        GoogleTimeZone googleTimeZone = new GoogleTimeZone();
+        final Long timeStamp = System.currentTimeMillis() / 1000L;
+        TimeZone timeZone = googleTimeZone.getTimeZone(lat, lng, timeStamp.toString(), restTemplate, googleApiKey);
+        model.addAttribute("timezone", timeZone.getTimeZoneName());
+
+        GoogleElevation googleElevation = new GoogleElevation();
+        ElevationResponse elevation = googleElevation.getElevation(lat, lng, restTemplate, googleApiKey);
+        model.addAttribute("elevation", elevation.getResults()[0].getElevation());
+
+        OpenWeather openWeather = new OpenWeather();
+        WeatherResponse weather = openWeather.getWeather(zipCode, restTemplate, weatherApiKey);
+        model.addAttribute("city", weather.getName());
+        model.addAttribute("temperature", weather.getTemperature().getTemperature());
+
+        return "zipdata";
     }
 }

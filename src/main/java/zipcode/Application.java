@@ -2,6 +2,7 @@ package zipcode;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,13 +24,17 @@ public class Application {
         return builder.build();
     }
 
+    @Value("${weather.api.key}")
+    String weatherKey;
+
+    @Value("${google.api.key}")
+    String key;
+
     @Bean
     public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
         return args -> {
-//            Quote quote = restTemplate.getForObject(
-//                    "http://gturnquist-quoters.cfapps.io/api/random", Quote.class);
-//            log.info(quote.toString());
-            final String key = "AIzaSyCpuimIRcnwjKDVOzU0lxtHjswk9zXKsX0";
+            log.info("THIS IS THE KEY " + key);
+//            final String key = "AIzaSyCpuimIRcnwjKDVOzU0lxtHjswk9zXKsX0";
             final String zipCode = "97701";
 
             //GOOGLE GEOCODE//
@@ -55,6 +60,7 @@ public class Application {
 //            TimeZone response = restTemplate.getForObject(uri, TimeZone.class, key);
             TimeZone timeZone = restTemplate.getForObject(timezoneURL, TimeZone.class, location, timestamp, key);
             log.info(timeZone.toString());
+            log.info("TIME ZONE NAME: " + timeZone.getTimeZoneName());
 
             // GOOGLE ELEVATION //
             final String elevationURL = "https://maps.googleapis.com/maps/api/elevation/json?" +
@@ -63,11 +69,12 @@ public class Application {
             log.info("ELEVATION:" + elevation.getResults()[0].getElevation());
 
             // OPEN WEATHER //
-            final String weather_key = "b48966559806edfd70c71b835fa1a945";
+//            final String weatherKey = "b48966559806edfd70c71b835fa1a945";
             final String weatherURL = "https://api.openweathermap.org/data/2.5/weather?" +
-                    "zip={zipCode},us&units=imperial&appid={weather_key}";
-            WeatherResponse weather = restTemplate.getForObject(weatherURL, WeatherResponse.class, zipCode, weather_key);
-            log.info("WEATHER: " + weather);
+                    "zip={zipCode},us&units=imperial&appid={weatherKey}";
+            WeatherResponse weather = restTemplate.getForObject(weatherURL, WeatherResponse.class, zipCode, weatherKey);
+            log.info("CITY: " + weather.getName());
+            log.info("TEMP: " + weather.getTemperature().getTemperature());
 
         };
     }
