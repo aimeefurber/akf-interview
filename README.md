@@ -9,8 +9,6 @@ Create a service using Java Spring Boot (and any additional libraries of your ch
 - Use the Google Time Zone API to get the current timezone for a location. You will again need to register a “project” and sign up for a free API key * with Google.
 - Use the Google Elevation API to retrieve elevation data for a location.
 
-In addition to the required assignment above, write a modern JS-based SPA front-end that allows a user to input a zipcode, then output the response-message to the page, preferably utilizing the tool you created above.
-
 ## Build Instructions
 - `mvn clean package`
 - `java -jar target/cayuse-interview-0.0.1-SNAPSHOT.jar`
