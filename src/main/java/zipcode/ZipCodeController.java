@@ -45,12 +45,13 @@ public class ZipCodeController {
 
         GoogleElevation googleElevation = new GoogleElevation();
         ElevationResponse elevation = googleElevation.getElevation(lat, lng, restTemplate, googleApiKey);
-        model.addAttribute("elevation", elevation.getResults()[0].getElevation());
+        long roundedElevation = Math.round(elevation.getResults()[0].getElevation());
+        model.addAttribute("elevation", roundedElevation);
 
         OpenWeather openWeather = new OpenWeather();
         WeatherResponse weather = openWeather.getWeather(zipCode, restTemplate, weatherApiKey);
         model.addAttribute("city", weather.getName());
-        model.addAttribute("temperature", weather.getTemperature().getTemperature());
+        model.addAttribute("temperature", weather.getWeatherDetails().getTemperature());
 
         return "zipdata";
     }

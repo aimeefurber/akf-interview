@@ -7,18 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class WeatherResponse {
 
     @JsonProperty("main")
-    private Temperature temperature;
+    private WeatherDetails weatherDetails;
 
     @JsonProperty("name")
     private String name;
 
-    public Temperature getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(Temperature temperature) {
-        this.temperature = temperature;
-    }
 
     public String getName() {
         return name;
@@ -28,10 +21,18 @@ public class WeatherResponse {
         this.name = name;
     }
 
+    public WeatherDetails getWeatherDetails() {
+        return weatherDetails;
+    }
+
+    public void setWeatherDetails(WeatherDetails weatherDetails) {
+        this.weatherDetails = weatherDetails;
+    }
+
     @Override
     public String toString() {
         return "WeatherResponse{" +
-                "temperature=" + temperature +
+                "weatherDetails=" + weatherDetails +
                 ", name='" + name + '\'' +
                 '}';
     }

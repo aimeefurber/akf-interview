@@ -66,7 +66,8 @@ public class Application {
             final String elevationURL = "https://maps.googleapis.com/maps/api/elevation/json?" +
                     "locations={location}&key={key}";
             ElevationResponse elevation = restTemplate.getForObject(elevationURL, ElevationResponse.class, location, key);
-            log.info("ELEVATION:" + elevation.getResults()[0].getElevation());
+            long roundedElevation = Math.round(elevation.getResults()[0].getElevation());
+            log.info("ELEVATION:" + roundedElevation);
 
             // OPEN WEATHER //
 //            final String weatherKey = "b48966559806edfd70c71b835fa1a945";
@@ -74,7 +75,7 @@ public class Application {
                     "zip={zipCode},us&units=imperial&appid={weatherKey}";
             WeatherResponse weather = restTemplate.getForObject(weatherURL, WeatherResponse.class, zipCode, weatherKey);
             log.info("CITY: " + weather.getName());
-            log.info("TEMP: " + weather.getTemperature().getTemperature());
+            log.info("TEMP: " + weather.getWeatherDetails().getTemperature());
 
         };
     }

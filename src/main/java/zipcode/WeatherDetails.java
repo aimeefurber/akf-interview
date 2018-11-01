@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Temperature {
+public class WeatherDetails {
     @JsonProperty("temp")
     private String temperature;
 
@@ -18,7 +18,7 @@ public class Temperature {
 
     @Override
     public String toString() {
-        return "Temperature{" +
+        return "WeatherDetails{" +
                 "temperature='" + temperature + '\'' +
                 '}';
     }

@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ElevationResults {
     @JsonProperty("elevation")
-    private String elevation;
+    private double elevation;
 
-    public String getElevation() {
+    public double getElevation() {
         return elevation;
     }
 
-    public void setElevation(String elevation) {
+    public void setElevation(double elevation) {
         this.elevation = elevation;
     }
 

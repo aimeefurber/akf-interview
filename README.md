@@ -12,3 +12,7 @@ Create a service using Java Spring Boot (and any additional libraries of your ch
 In addition to the required assignment above, write a modern JS-based SPA front-end that allows a user to input a zipcode, then output the response-message to the page, preferably utilizing the tool you created above.
 
 ## Build Instructions
+- `mvn clean package`
+- `java -jar target/cayuse-interview-0.0.1-SNAPSHOT.jar`
+To override default properties with other build environments:
+`java -jar target/cayuse-interview-0.0.1-SNAPSHOT.jar --google.api.key=${googleAPIkey} --weather.api.key=${weatherAPIkey}`
